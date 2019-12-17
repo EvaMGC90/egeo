@@ -1,18 +1,20 @@
 # Header (Component)
 
-   The header component is a main component of an application.This component must be on top and scroll with page, when scroll is in a calculated position,the header shrinks and fix to top.
+   The header component is a main component of an application. This component must be on top and scroll with page, when scroll is in a calculated position, the header shrinks and fix to top.
 
 ## Inputs
 
-| Property | Type                 | Req   | Description                    | Default |
-| -------- | -------------------- | ----- | ------------------------------ | ------- |
-| menu     | StHeaderMenuOption[] | False | Array with menu option to show |         |
+| Property | Type                 | Req   | Description                                                                                     | Default |
+| -------- | -------------------- | ----- | ----------------------------------------------------------------------------------------------- | ------- |
+| menu     | StHeaderMenuOption[] | False | Array with menu option to show                                                                  |         |
+| boolean  | NavigateByDefault    | False | True if we want menu to manage navigation, false if navigation will be managed from the outside |         |
+| small    | Boolean              | False | Option for a thinner header and an arrow marker under active option                             |         |
 
 ## Outputs
 
-| Property   | Type   | Description                      |
-| ---------- | ------ | -------------------------------- |
-| selectMenu | String | Notify any menu option selection |
+| Property   | Type                        | Description                      |
+| ---------- | --------------------------- | -------------------------------- |
+| selectMenu | StHeaderSelection \| string | Notify any menu option selection |
 
 ## Example
 
@@ -36,10 +38,12 @@
 
 ```typescript
 export class StHeaderMenuOption {
-    icon: string; // Icon to show on left of menu label
+    icon ? : string; // Icon to show on left of menu label
     label: string; // Menu label to show
-    link: string; // Link to navigate when click
     subMenus: StHeaderSubMenuOption[]; // List of submenu options
+    link: string;
+    external ? : boolean;
+    openInNewPage ? : boolean;
 }
 ```
 
@@ -48,7 +52,9 @@ export class StHeaderMenuOption {
 ```typescript
 export class StHeaderSubMenuOption {
     label: string; // Label to show
-    link: string; // Link to navigate when click
+    link: string;
+    external ? : boolean;
+    openInNewPage ? : boolean;
 }
 ```
 

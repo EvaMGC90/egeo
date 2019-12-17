@@ -17,7 +17,8 @@ import {
    HostListener,
    Input,
    Output,
-   ViewChild
+   ViewChild,
+   HostBinding
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -62,10 +63,14 @@ export class StHeaderComponent implements AfterViewInit {
 
    /** @Input {StHeaderMenuOption[]} [menu] Array with menu option to show */
    @Input() menu: StHeaderMenuOption[] = [];
-   /** @Input {StHeaderMenuOption[]} [menu] Array with menu option to show */
+   /** @Input {navigateByDefault} [boolean] True if we want menu to manage navigation, false if navigation will be managed from the outside */
    @Input() navigateByDefault: boolean = true;
-   /** @Output {string} [selectMenu] Notify any menu option selection */
-   @Output() selectMenu: EventEmitter<string> = new EventEmitter<string>();
+   /** @Input {boolean} [small] Option for a thinner header and an arrow marker under active option */
+   @HostBinding('class.small')
+   @Input() small: Boolean;
+
+   /** @Output {StHeaderSelection | string} [selectMenu] Notify any menu option selection */
+   @Output() selectMenu: EventEmitter<StHeaderSelection | string> = new EventEmitter<StHeaderSelection | string>();
 
    @ViewChild('headerDivElement', {static: false}) headerDivElement: ElementRef;
    @ViewChild('headerFixPart', {static: false}) headerFixPart: ElementRef;
@@ -102,8 +107,10 @@ export class StHeaderComponent implements AfterViewInit {
          } else {
             this._router.navigate([selected.link]);
          }
+         this.selectMenu.emit(selected.link);
+      } else {
+         this.selectMenu.emit(selected);
       }
-      this.selectMenu.emit(selected.link);
    }
 
    public get menuContainerId(): string {

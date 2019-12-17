@@ -24,7 +24,7 @@
 * Update icon palette
 * Update font size variables
 * st-select: Apply new UX font size and color in forms
-
+* st-header: Include option small to adapt header to new UX defined styles
 
 ## 18.0.0 (January 16, 2020)
 

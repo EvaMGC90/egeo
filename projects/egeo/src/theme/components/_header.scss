@@ -42,6 +42,7 @@
          height: 70px;
 
          .sth-header-logo {
+            position: relative;
             margin-right: 60px;
             display: flex;
             align-self: center;
@@ -74,14 +75,7 @@
    flex-direction: row;
    flex-wrap: nowrap;
    align-content: flex-end;
-
-   .sth-header-menu-item {
-      padding: 0;
-      margin-right: 45px;
-      &:last-child {
-         margin-right: 0;
-      }
-   }
+   height: 100%;
 }
 
 .sth-header-menu-option {
@@ -94,14 +88,13 @@
    flex-direction: row;
    flex-wrap: nowrap;
    align-items: flex-end;
+   position: relative;
 
+   &.active,
    &:hover {
       color: $neutral-full;
    }
 
-   &.active {
-      color: $neutral-full;
-   }
    .sth-header-menu-option-name {
       display: flex;
       flex-direction: row;
@@ -137,5 +130,32 @@
       line-height: 15px;
       text-align: left;
       align-self: flex-end;
+   }
+}
+
+st-header.small {
+   .sth-header {
+      height: 50px;
+
+      .sth-header-container .sth-header-container-fix-part {
+         height: 50px;
+
+         .sth-header-menu-component {
+            height: 50px;
+
+            .sth-header-menu {
+               height: 100%;
+               align-items: center;
+            }
+
+            .sth-header-menu-option .sth-header-menu-option-name {
+               font-size: $egeo-font-size-14;
+            }
+         }
+      }
+
+      .sth-header-user-menu-container {
+         height: 50px;
+      }
    }
 }
